@@ -9,7 +9,8 @@ import { SupabaseAuthClient } from '@supabase/supabase-js/dist/module/lib/Supaba
   <p>
     Please login if you have an account or register :
   </p>
-  <button @click="login()">Sign In</button><br>
+  <button @click="login()">Sign In Google</button><br>
+  <button @click="logingithub()">Sign In Github</button><br>
   <button @click="logout()">Sign Out</button><br>
   <label id="status">You are not yet logged ! </label>
 </template>
@@ -20,6 +21,8 @@ const SUPABASE_URL = 'https://nfkbfkpimlfcegkuzjca.supabase.co'
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ma2Jma3BpbWxmY2Vna3V6amNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjM1OTU3NzgsImV4cCI6MTk3OTE3MTc3OH0.gas84-8B7VMq1xTs3V-K42u_aFM801gvZmXhC2dDTVA'
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 
+
+
 supabase.auth.onAuthStateChange((event, session) => {
   if (session == null) {
     document.getElementById('status').innerHTML = 'You are not logged !!!';
@@ -28,6 +31,7 @@ supabase.auth.onAuthStateChange((event, session) => {
     document.getElementById('status').innerHTML = 'You are logged with the email: ' + session.user.email;
   }
 })
+
 
 
 
@@ -55,6 +59,19 @@ export default {
         alert(error.error_description || error.message);
       }
     },
+
+    async logingithub() {
+      try {
+        const { user, session, error } = await supabase.auth.signIn({
+          provider: 'github',
+        });
+        if (error) throw error;
+      } catch (error) {
+        alert(error.error_description || error.message);
+      }
+
+    },
+
   },
 
 
