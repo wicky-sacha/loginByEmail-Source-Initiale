@@ -9,8 +9,8 @@ import { SupabaseAuthClient } from '@supabase/supabase-js/dist/module/lib/Supaba
   <p>
     Please login if you have an account or register :
   </p>
-  <button @click="login()">Sign In Google</button><br>
-  <button @click="logingithub()">Sign In Github</button><br>
+  <button @click="login()">Sign In with Google</button><br>
+  <button @click="logingithub()">Sign In with Github</button><br>
   <button @click="logout()">Sign Out</button><br>
   <label id="status">You are not yet logged ! </label>
 </template>
